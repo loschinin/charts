@@ -1,0 +1,22 @@
+.container {
+  color: honeydew;
+  row-gap: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.date-picker-button {
+  width: 100%;
+}
+
+.chart-with-picker {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+@media (max-width: 700px) {
+  .chart-with-picker {
+    flex-direction: column;
+  }
+}

@@ -4,7 +4,9 @@ import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { pink } from '@mui/material/colors';
-import Header from "./Header/Header";
+import { Header } from './Header/Header';
+import { Charts } from './Charts/Charts';
+import { Settings } from './Settings/Settings';
 
 function App() {
   const darkTheme = createTheme({
@@ -19,17 +21,17 @@ function App() {
     },
   });
   return (
-      <ThemeProvider theme={darkTheme}>
-        <BrowserRouter>
-          <Header />
-          <div className={'container'}>
-            <Routes>
-              <Route path="/" element={<div />} />
-              <Route path="/settings" element={<div />} />
-            </Routes>
-          </div>
-        </BrowserRouter>
-      </ThemeProvider>
+    <ThemeProvider theme={darkTheme}>
+      <BrowserRouter>
+        <Header />
+        <div className={'container'}>
+          <Routes>
+            <Route path="/" element={<Charts />} />
+            <Route path="/settings" element={<Settings />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 

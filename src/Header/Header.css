@@ -1,23 +1,22 @@
 .header {
-    display: flex;
-    padding: 8px 16px;
-    background-color: #282c34;
-    column-gap: 16px;
-    align-items: center;
-    font-size: 22px;
-
+  display: flex;
+  padding: 8px 16px;
+  background-color: #282c34;
+  column-gap: 16px;
+  align-items: center;
+  font-size: 22px;
 }
 
 a {
-    color: #d9d9d9;
-    text-decoration: none;
+  color: #d9d9d9;
+  text-decoration: none;
 }
 
 img {
-    width: 30px;
+  width: 30px;
 }
 
 .active {
-    color: #ffffff;
-    text-decoration: underline;
+  color: #ffffff;
+  text-decoration: underline;
 }
