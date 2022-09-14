@@ -1,0 +1,12 @@
+.container {
+  color: honeydew;
+}
+
+.date-picker-button {
+  width: 100%;
+}
+
+.chart-with-picker {
+  display: flex;
+  justify-content: space-evenly;
+}
