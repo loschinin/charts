@@ -13,12 +13,15 @@ type Props = {
   chartType?: 'column' | 'line' | 'spline' | 'area' | 'bar' | 'pie';
   chartBgColor?: string;
 };
+const OFFSET = 350
+const BREAK_POINT = 700
+const DEFAULT_BG_COLOR = '#575757'
 
 export const Chart = ({
   chartName,
   selectedDaysData,
   chartType = 'column',
-  chartBgColor = '#575757',
+  chartBgColor = DEFAULT_BG_COLOR,
 }: Props) => {
   const formatDate = (date: string) =>
     moment(date).format('MMMM DD YYYY');
@@ -29,7 +32,8 @@ export const Chart = ({
 
   const [width, setWidth] = useState(0);
   const updateChartWidth = useCallback(() => {
-    setWidth(document.documentElement.clientWidth - 400);
+    const clientWidth = document.documentElement.clientWidth
+    setWidth(clientWidth < BREAK_POINT ? clientWidth : clientWidth - OFFSET);
   }, []);
 
   useEffect(() => {
