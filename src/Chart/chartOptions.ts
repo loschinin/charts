@@ -1,18 +1,4 @@
 export const chartOptions = {
-  chart: {
-    type: 'column',
-    animation: true,
-    height: 300,
-    width: 900,
-    backgroundColor: '#575757',
-  },
-  title: {
-    align: 'left',
-    text: 'Activity',
-    style: {
-      color: '#ffffff',
-    },
-  },
   subtitle: {
     align: 'left',
   },

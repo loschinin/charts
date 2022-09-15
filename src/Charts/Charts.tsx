@@ -30,7 +30,7 @@ export const Charts = () => {
   const [selectedDaysData1, setSelectedDaysData1] =
     useState<Data[]>(mockData1);
   const [selectedDaysData2, setSelectedDaysData2] =
-    useState<Data[]>(mockData1);
+    useState<Data[]>(mockData2);
 
   return (
     <div className={'container'}>
