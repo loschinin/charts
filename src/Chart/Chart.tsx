@@ -1,10 +1,11 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
 import { chartOptions } from './chartOptions';
 import moment from 'moment/moment';
+import { useWindowWidth } from '../Charts/useWindowWidth';
 
 export type Data = { date: string; value: number };
 type Props = {
@@ -14,8 +15,7 @@ type Props = {
   chartType?: 'column' | 'line' | 'spline' | 'area' | 'bar' | 'pie';
   chartBgColor?: string;
 };
-const OFFSET = 350;
-const BREAK_POINT = 700;
+
 const DEFAULT_BG_COLOR = '#575757';
 
 export const Chart = ({
@@ -32,21 +32,7 @@ export const Chart = ({
     y: values[index],
   }));
 
-  const [width, setWidth] = useState(0);
-  const updateChartWidth = useCallback(() => {
-    const clientWidth = document.documentElement.clientWidth;
-    setWidth(
-      clientWidth < BREAK_POINT ? clientWidth : clientWidth - OFFSET
-    );
-  }, []);
-
-  useEffect(() => {
-    updateChartWidth();
-    window.addEventListener('resize', updateChartWidth);
-    return () => {
-      window.removeEventListener('resize', updateChartWidth);
-    };
-  }, [updateChartWidth]);
+  const width = useWindowWidth();
 
   return (
     <div>
@@ -58,19 +44,19 @@ export const Chart = ({
             type: chartType,
             animation: true,
             height: 300,
-            width: width,
+            width,
             backgroundColor: chartBgColor,
           },
           title: {
             align: 'left',
-            text: 'Activity',
+            text: chartName,
             style: {
               color: '#ffffff',
             },
           },
           series: [
             {
-              date: chartName,
+              date: '',
               colorByPoint: true,
               data: mergedData,
             },
