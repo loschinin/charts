@@ -1,3 +1,10 @@
 .settings {
   color: honeydew;
+  row-gap: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.open-modal-button {
+  max-width: 400px;
 }

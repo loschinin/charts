@@ -1,24 +1,26 @@
-import {useCallback, useEffect, useState} from "react";
+import { useCallback, useEffect, useState } from 'react';
 
-const OFFSET = 350;
-const BREAK_POINT = 700;
+type Props = {
+  offset: number;
+  breakPoint: number;
+};
 
-export const useWindowWidth = () => {
-    const [width, setWidth] = useState(0);
-    const updateChartWidth = useCallback(() => {
-        const clientWidth = document.documentElement.clientWidth;
-        setWidth(
-            clientWidth < BREAK_POINT ? clientWidth : clientWidth - OFFSET
-        );
-    }, []);
+export const useWindowWidth = ({ offset, breakPoint }: Props) => {
+  const [width, setWidth] = useState(0);
+  const updateChartWidth = useCallback(() => {
+    const clientWidth = document.documentElement.clientWidth;
+    setWidth(
+      clientWidth < breakPoint ? clientWidth : clientWidth - offset
+    );
+  }, [offset, breakPoint]);
 
-    useEffect(() => {
-        updateChartWidth();
-        window.addEventListener('resize', updateChartWidth);
-        return () => {
-            window.removeEventListener('resize', updateChartWidth);
-        };
-    }, [updateChartWidth]);
+  useEffect(() => {
+    updateChartWidth();
+    window.addEventListener('resize', updateChartWidth);
+    return () => {
+      window.removeEventListener('resize', updateChartWidth);
+    };
+  }, [updateChartWidth]);
 
-    return width
-}
+  return width;
+};
