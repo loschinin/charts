@@ -9,15 +9,17 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 import { removeChart } from '../../store/chartSlice';
+import EditChartModal from '../EditChartModal/EditChartModal';
 
 export const Settings = () => {
   const [open, setOpen] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [chartId, setChartId] = useState('');
   const handleOpen = () => {
     setOpen(true);
   };
   const dispatch = useAppDispatch();
   const { charts } = useAppSelector(state => state.charts);
-
   return (
     <div className={'settings'}>
       <PageTitle
@@ -29,15 +31,15 @@ export const Settings = () => {
         onClick={handleOpen}
         className={'open-modal-button'}
         variant={'contained'}
+        title={'Open modal window to create a new Chart'}
       >
-        <AddIcon /> Add new Chart in modal
+        <AddIcon /> Add new Chart
       </Button>
       <AddChartModal open={open} setOpen={setOpen} />
 
       {charts.map((chart, index) => (
-        <div className={'chart-and-edit-block'}>
+        <div className={'chart-and-edit-block'} key={chart.name}>
           <Chart
-            key={chart.name}
             chartName={chart.name}
             chartType={chart.type}
             chartBgColor={chart.bgColor}
@@ -45,26 +47,35 @@ export const Settings = () => {
               data => data.date
             )}
             values={chart.seriesData.map(data => data.value)}
-            widthOffset={220}
+            widthOffset={88}
           />
           <div className={'edit-block'}>
             <Button
-              className={'button'}
               onClick={() => dispatch(removeChart({ index }))}
               variant={'contained'}
-              sx={{ justifyContent: 'flex-start' }}
+              sx={{ height: '64px' }}
+              title={'Remove chart forever'}
             >
               <DeleteForeverIcon />
-              REMOVE CHART
             </Button>
             <Button
-              className={'button'}
+              id={index.toString()}
               variant={'contained'}
-              sx={{ justifyContent: 'flex-start' }}
+              sx={{ height: '64px' }}
+              onClick={event => {
+                setChartId(event.currentTarget.id);
+                setOpenEditModal(true);
+              }}
+              title={'Open modal window to edit Chart'}
             >
               <EditIcon />
-              EDIT CHART
             </Button>
+
+            <EditChartModal
+              chartIndex={+chartId}
+              open={openEditModal}
+              setOpen={setOpenEditModal}
+            />
           </div>
         </div>
       ))}

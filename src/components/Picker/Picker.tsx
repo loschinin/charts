@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { Button } from '@mui/material';
 import moment from 'moment/moment';
+import 'react-datepicker/dist/react-datepicker.css';
+import './Picker.css'
 
 const getValueOfDate = (date: Date | string) => {
   return new Date(moment(date).format('ddd D MMM')).valueOf();
@@ -24,6 +26,7 @@ export const Picker = ({ dates, setSelected }: Props) => {
   return (
     <div>
       <DatePicker
+          className={'date-picker'}
         selected={startDate}
         onChange={onChange}
         startDate={startDate}

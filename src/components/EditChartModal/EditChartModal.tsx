@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   Box,
   Button,
@@ -14,33 +14,58 @@ import { SketchPicker } from 'react-color';
 import { Chart } from '../Chart/Chart';
 import { mockSeriesData1 } from '../../store/mockData';
 import { useWindowWidth } from '../Charts/useWindowWidth';
-import './AddChartModal.css';
-import { useAppDispatch } from '../../hooks';
-import { addChart, ChartType } from '../../store/chartSlice';
+import './EditChartModal.css';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { ChartType, editChart } from '../../store/chartSlice';
 import PageTitle from '../PageTitle/PageTitle';
 
 type Props = {
   open: boolean;
+  chartIndex: number;
   setOpen(flag: boolean): void;
 };
 const chartTypes = ['column', 'line', 'spline', 'area', 'bar', 'pie'];
 
-const AddChartModal = ({ open, setOpen }: Props) => {
+const EditChartModal = ({ open, setOpen, chartIndex }: Props) => {
+  const { charts } = useAppSelector(state => state.charts);
   const handleClose = () => {
     setOpen(false);
   };
-  const initialChartName = '';
+
+  const initialChartName = charts[chartIndex].name;
   const [chartName, setChartName] = useState(initialChartName);
-  const [pickerColor, setPickerColor] = useState('#361659');
-  const [chartType, setChartType] = useState<ChartType>('column');
+  const [pickerColor, setPickerColor] = useState(
+    charts[chartIndex].bgColor
+  );
+  const [chartType, setChartType] = useState<ChartType>(
+    charts[chartIndex].type
+  );
   const handleChangeChartType = (event: SelectChangeEvent) =>
     setChartType(event.target.value as ChartType);
   const width = useWindowWidth({ offset: 300, breakPoint: 700 });
+
   const dispatch = useAppDispatch();
+
+  const isConfirmDisabled =
+    !chartName ||
+    (chartName === charts[chartIndex].name &&
+    pickerColor === charts[chartIndex].bgColor &&
+    chartType === charts[chartIndex].type);
+
+  const setDefaultPreviewState = useCallback(() => {
+    setChartName(initialChartName);
+    setPickerColor(charts[chartIndex].bgColor);
+    setChartType(charts[chartIndex].type);
+  }, [chartIndex, charts, initialChartName]);
+
+  useEffect(() => {
+    setDefaultPreviewState();
+  }, [setDefaultPreviewState]);
+
   return (
     <Modal open={open} onClose={handleClose}>
       <Box sx={{ width }} className={'modal-container'}>
-        <PageTitle text={'Add new Chart'} />
+        <PageTitle text={`Edit Chart "${charts[chartIndex].name}"`} />
         <div className={'adding-chart'}>
           <Input
             value={chartName}
@@ -69,7 +94,7 @@ const AddChartModal = ({ open, setOpen }: Props) => {
         </div>
         <div className={'chart-and-color-picker'}>
           <SketchPicker
-              className={'color-picker'}
+            className={'color-picker'}
             color={pickerColor}
             onChange={color => {
               setPickerColor(color.hex);
@@ -90,8 +115,8 @@ const AddChartModal = ({ open, setOpen }: Props) => {
         </div>
         <Button
           className={'add-button'}
-          disabled={!chartName}
-          onClick={handleConfirmAddingChart}
+          disabled={isConfirmDisabled}
+          onClick={handleConfirmEditChart}
           variant={'contained'}
         >
           CONFIRM
@@ -100,13 +125,17 @@ const AddChartModal = ({ open, setOpen }: Props) => {
     </Modal>
   );
 
-  function handleConfirmAddingChart() {
-    setChartName(initialChartName);
+  function handleConfirmEditChart() {
     setOpen(false);
     dispatch(
-      addChart({ chartName, chartType, bgColor: pickerColor })
+      editChart({
+        chartIndex,
+        chartName,
+        chartType,
+        bgColor: pickerColor,
+      })
     );
   }
 };
 
-export default AddChartModal;
+export default EditChartModal;

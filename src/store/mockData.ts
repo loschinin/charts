@@ -3,15 +3,15 @@ import { DataType, SeriesData } from './chartSlice';
 export const mockSeriesData1: SeriesData[] = [
   {
     date: '2022-09-14T01:32:21.196Z',
-    value: 3,
+    value: 7,
   },
   {
     date: '2022-09-15T01:32:21.196Z',
-    value: 4,
+    value: 8,
   },
   {
     date: '2022-09-16T01:32:21.196Z',
-    value: 3,
+    value: 9,
   },
 ];
 
@@ -32,15 +32,15 @@ export const mockSeriesData2: SeriesData[] = [
 
 export const mockData: DataType[] = [
   {
-    name: 'chart1',
+    name: 'How many hours you worked',
     type: 'column',
-    bgColor: '#afafaf',
+    bgColor: '#061d25',
     seriesData: mockSeriesData1,
   },
   {
-    name: 'chart2',
+    name: 'How many hours of rest you had',
     type: 'area',
-    bgColor: '#343434',
+    bgColor: '#1f121f',
     seriesData: mockSeriesData2,
   },
 ];

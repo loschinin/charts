@@ -6,7 +6,7 @@
 }
 
 .open-modal-button {
-  max-width: 400px;
+  max-width: 200px;
   column-gap: 8px;
 }
 
@@ -19,8 +19,4 @@
   display: flex;
   flex-direction: column;
   row-gap: 8px;
-}
-
-.button {
-  column-gap: 8px;
 }

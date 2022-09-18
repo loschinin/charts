@@ -74,11 +74,11 @@ export const Chart = ({
             text: chartName,
             style: {
               color: '#ffffff',
+              fontSize: 35,
             },
           },
           series: [
             {
-              date: '',
               colorByPoint: true,
               data: mergedData,
             },

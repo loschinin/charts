@@ -38,6 +38,27 @@ const chartSlice = createSlice({
         seriesData: mockSeriesData1,
       });
     },
+    editChart(
+      state,
+      action: PayloadAction<{
+        chartIndex: number;
+        chartName: string;
+        chartType: ChartType;
+        bgColor: string;
+      }>
+    ) {
+      state.charts = state.charts.map((chart, index) => {
+        if (index === action.payload.chartIndex) {
+          return {
+            ...chart,
+            name: action.payload.chartName,
+            type: action.payload.chartType,
+            bgColor: action.payload.bgColor,
+          };
+        }
+        return { ...chart };
+      });
+    },
     removeChart(state, action: PayloadAction<{ index: number }>) {
       state.charts = state.charts.filter(
         (_, index) => index !== action.payload.index
@@ -47,5 +68,6 @@ const chartSlice = createSlice({
   },
 });
 
-export const { addChart, removeChart } = chartSlice.actions;
+export const { addChart, editChart, removeChart } =
+  chartSlice.actions;
 export default chartSlice.reducer;
