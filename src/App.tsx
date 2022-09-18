@@ -4,9 +4,9 @@ import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { pink } from '@mui/material/colors';
-import { Header } from './Header/Header';
-import { Charts } from './Charts/Charts';
-import { Settings } from './Settings/Settings';
+import { Header } from './components/Header/Header';
+import { Charts } from './components/Charts/Charts';
+import { Settings } from './components/Settings/Settings';
 
 function App() {
   const darkTheme = createTheme({

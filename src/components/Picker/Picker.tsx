@@ -5,7 +5,7 @@ import moment from 'moment/moment';
 
 const getValueOfDate = (date: Date | string) => {
   return new Date(moment(date).format('ddd D MMM')).valueOf();
-}
+};
 
 type Props = {
   dates: string[];
@@ -45,10 +45,11 @@ export const Picker = ({ dates, setSelected }: Props) => {
     const filteredDates = dates.filter(date => {
       const dateValue = getValueOfDate(date);
       return (
-          dateValue >= getValueOfDate(startDate) &&
-          dateValue <= getValueOfDate(endDate || startDate)
+        dateValue >= getValueOfDate(startDate) &&
+        dateValue <= getValueOfDate(endDate || startDate)
       );
-    })
+    });
+    console.log('filteredDates', filteredDates);
     setSelected(filteredDates);
   }
 };
