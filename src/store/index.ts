@@ -6,7 +6,6 @@ const store = configureStore({
     charts: chartReducer,
   },
 });
-console.log('store 2', store.getState());
 export default store;
 
 export type RootState = ReturnType<typeof store.getState>;

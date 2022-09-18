@@ -49,7 +49,6 @@ export const Picker = ({ dates, setSelected }: Props) => {
         dateValue <= getValueOfDate(endDate || startDate)
       );
     });
-    console.log('filteredDates', filteredDates);
     setSelected(filteredDates);
   }
 };

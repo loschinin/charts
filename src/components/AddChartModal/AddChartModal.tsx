@@ -15,7 +15,7 @@ import { Chart } from '../Chart/Chart';
 import { mockSeriesData1 } from '../../store/mockData';
 import { useWindowWidth } from '../Charts/useWindowWidth';
 import './AddChartModal.css';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch } from '../../hooks';
 import { addChart, ChartType } from '../../store/chartSlice';
 import PageTitle from '../PageTitle/PageTitle';
 
@@ -37,8 +37,6 @@ const AddChartModal = ({ open, setOpen }: Props) => {
     setChartType(event.target.value as ChartType);
   const width = useWindowWidth({ offset: 300, breakPoint: 700 });
   const dispatch = useAppDispatch();
-  const charts = useAppSelector(state => state.charts);
-  console.log('MODAL charts', charts);
   return (
     <Modal open={open} onClose={handleClose}>
       <Box sx={{ width }} className={'modal-container'}>

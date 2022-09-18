@@ -8,3 +8,13 @@
 .date-picker-button {
   width: 100%;
 }
+
+.empty-data {
+  color: honeydew;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}

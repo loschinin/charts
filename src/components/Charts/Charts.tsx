@@ -6,7 +6,7 @@ import { useAppSelector } from '../../hooks';
 import PageTitle from '../PageTitle/PageTitle';
 
 export const Charts = () => {
-  const charts = useAppSelector(state => state.charts);
+  const { charts } = useAppSelector(state => state.charts);
 
   return charts.length ? (
     <div className={'charts-page'}>
@@ -22,10 +22,14 @@ export const Charts = () => {
           )}
           values={chart.seriesData.map(data => data.value)}
           withPicker
+          widthOffset={265}
         />
       ))}
     </div>
   ) : (
-    <>No data for charts</>
+    <div className={'empty-data'}>
+      No data for charts
+      <br /> You can add new chart in Settings Page
+    </div>
   );
 };

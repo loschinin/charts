@@ -7,4 +7,20 @@
 
 .open-modal-button {
   max-width: 400px;
+  column-gap: 8px;
+}
+
+.chart-and-edit-block {
+  display: flex;
+  column-gap: 8px;
+}
+
+.edit-block {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+}
+
+.button {
+  column-gap: 8px;
 }

@@ -1,7 +1,8 @@
 .chart-with-date-picker {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: center;
+  column-gap: 8px;
 }
 
 @media (max-width: 700px) {
