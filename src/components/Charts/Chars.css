@@ -1,10 +1,10 @@
-.settings {
+.charts-page {
   color: honeydew;
   row-gap: 30px;
   display: flex;
   flex-direction: column;
 }
 
-.open-modal-button {
-  max-width: 400px;
+.date-picker-button {
+  width: 100%;
 }
