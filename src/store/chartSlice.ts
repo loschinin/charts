@@ -17,7 +17,7 @@ export type DataType = {
   seriesData: SeriesData[];
 };
 
-const initialState: DataType[] = mockData;
+const initialState: { charts: DataType[] } = { charts: mockData };
 
 const chartSlice = createSlice({
   name: 'charts',
@@ -31,17 +31,21 @@ const chartSlice = createSlice({
         bgColor: string;
       }>
     ) {
-      console.log('action', action);
-      state.unshift({
+      state.charts.unshift({
         name: action.payload.chartName,
         type: action.payload.chartType,
         bgColor: action.payload.bgColor,
         seriesData: mockSeriesData1,
       });
-      console.log('state', state);
+    },
+    removeChart(state, action: PayloadAction<{ index: number }>) {
+      state.charts = state.charts.filter(
+        (_, index) => index !== action.payload.index
+      );
+      console.log('removed from state', state);
     },
   },
 });
 
-export const { addChart } = chartSlice.actions;
+export const { addChart, removeChart } = chartSlice.actions;
 export default chartSlice.reducer;

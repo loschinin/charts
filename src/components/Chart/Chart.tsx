@@ -18,7 +18,7 @@ type Props = {
   chartBgColor?: string;
   widthOffset?: number;
   withPicker?: boolean;
-  height?: number
+  height?: number;
 };
 
 const DEFAULT_BG_COLOR = '#575757';
@@ -34,7 +34,7 @@ export const Chart = ({
   chartBgColor = DEFAULT_BG_COLOR,
   widthOffset = DEFAULT_OFFSET,
   withPicker,
-    height = DEFAULT_HEIGHT
+  height = DEFAULT_HEIGHT,
 }: Props) => {
   const formatDate = (date: string) =>
     moment(date).format('MMMM DD YYYY');
@@ -64,7 +64,7 @@ export const Chart = ({
           ...chartOptions,
           chart: {
             type: chartType,
-            animation: true,
+            animation: false,
             height: height,
             width,
             backgroundColor: chartBgColor,
