@@ -1,7 +1,6 @@
 import React from 'react';
 import './Chars.css';
 import { Chart } from '../Chart/Chart';
-import 'react-datepicker/dist/react-datepicker.css';
 import { useAppSelector } from '../../hooks';
 import PageTitle from '../PageTitle/PageTitle';
 
@@ -29,7 +28,7 @@ export const Charts = () => {
   ) : (
     <div className={'empty-data'}>
       No data for charts
-      <br /> You can add new chart in Settings Page
+      <br /> You can add new charts in Settings Page
     </div>
   );
 };
