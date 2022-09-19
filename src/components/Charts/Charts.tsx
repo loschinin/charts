@@ -3,6 +3,7 @@ import './Chars.css';
 import { Chart } from '../Chart/Chart';
 import { useAppSelector } from '../../hooks';
 import PageTitle from '../PageTitle/PageTitle';
+import { Link } from 'react-router-dom';
 
 export const Charts = () => {
   const { charts } = useAppSelector(state => state.charts);
@@ -16,9 +17,7 @@ export const Charts = () => {
           chartName={chart.name}
           chartBgColor={chart.bgColor}
           chartType={chart.type}
-          initialSelectedDates={chart.seriesData.map(
-            data => data.date
-          )}
+          initialSelectedDates={chart.seriesData.map(data => data.date)}
           values={chart.seriesData.map(data => data.value)}
           withPicker
           widthOffset={265}
@@ -27,8 +26,13 @@ export const Charts = () => {
     </div>
   ) : (
     <div className={'empty-data'}>
-      No data for charts
-      <br /> You can add new charts in Settings Page
+      <div>
+        No data for charts
+        <br />
+        You can add new charts
+        <br />
+        Go to <Link to={'/settings'}>Settings Page</Link>
+      </div>
     </div>
   );
 };

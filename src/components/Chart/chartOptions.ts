@@ -31,15 +31,7 @@ export const chartOptions = {
   },
   plotOptions: {
     column: {
-      colors: [
-        '#ffadad',
-        '#ffdead',
-        '#ebffad',
-        '#adffe2',
-        '#addaff',
-        '#cbadff',
-        '#ffadad',
-      ],
+      colors: ['#ffadad', '#ffdead', '#ebffad', '#adffe2', '#addaff', '#cbadff', '#ffadad'],
     },
     series: {
       borderWidth: 0,
@@ -47,12 +39,18 @@ export const chartOptions = {
         enabled: true,
         format: '{point.y:f}',
       },
+      fillColor: {
+        linearGradient: [0, 0, 0, 300],
+        stops: [
+          [0, '#7442f4'],
+          [1, 'rgba(255,255,255,0.19)']
+        ]
+      },
     },
   },
 
   tooltip: {
     headerFormat: '',
-    pointFormat:
-      '<span style="color:#111">{point.name}</span>: <b>{point.y:f}</b<br/>',
+    pointFormat: '<span style="color:#111">{point.name}</span>: <b>{point.y:f}</b<br/>',
   },
 };

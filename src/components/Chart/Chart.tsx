@@ -6,7 +6,7 @@ import HighchartsReact from 'highcharts-react-official';
 import { chartOptions } from './chartOptions';
 import moment from 'moment/moment';
 import { useWindowWidth } from '../Charts/useWindowWidth';
-import { Picker } from '../Picker/Picker';
+import { CustomDatePicker } from '../CustomDatePicker/CustomDatePicker';
 import './Chart.css';
 import { ChartType } from '../../store/chartSlice';
 
@@ -36,12 +36,9 @@ export const Chart = ({
   withPicker,
   height = DEFAULT_HEIGHT,
 }: Props) => {
-  const formatDate = (date: string) =>
-    moment(date).format('MMMM DD YYYY');
+  const formatDate = (date: string) => moment(date).format('MMMM DD YYYY');
 
-  const [selectedDates, setSelectedDates] = useState<string[]>(
-    initialSelectedDates
-  );
+  const [selectedDates, setSelectedDates] = useState<string[]>(initialSelectedDates);
   const width = useWindowWidth({
     offset: widthOffset,
     breakPoint: BREAK_POINT,
@@ -52,12 +49,7 @@ export const Chart = ({
   }));
   return (
     <div className={'chart-with-date-picker'}>
-      {withPicker && (
-        <Picker
-          setSelected={setSelectedDates}
-          dates={initialSelectedDates}
-        />
-      )}
+      {withPicker && <CustomDatePicker setSelected={setSelectedDates} dates={initialSelectedDates} />}
       <HighchartsReact
         highcharts={Highcharts}
         options={{
@@ -74,7 +66,7 @@ export const Chart = ({
             text: chartName,
             style: {
               color: '#ffffff',
-              fontSize: 35,
+              fontSize: 30,
             },
           },
           series: [

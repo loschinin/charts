@@ -5,13 +5,13 @@ type Props = {
   breakPoint: number;
 };
 
+const MIN_PADDING = 16
+
 export const useWindowWidth = ({ offset, breakPoint }: Props) => {
   const [width, setWidth] = useState(0);
   const updateChartWidth = useCallback(() => {
     const clientWidth = document.documentElement.clientWidth;
-    setWidth(
-      clientWidth < breakPoint ? clientWidth : clientWidth - offset
-    );
+    setWidth(clientWidth < breakPoint ? clientWidth - MIN_PADDING : clientWidth - offset);
   }, [offset, breakPoint]);
 
   useEffect(() => {

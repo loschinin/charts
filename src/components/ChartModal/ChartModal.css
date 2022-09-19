@@ -8,23 +8,25 @@
   transform: translate(-50%, -50%);
   position: absolute;
   background-color: #151515;
-  border: 2px solid black;
   padding: 20px 40px 30px;
-  box-shadow: 1px -1px 84px 10px rgba(0, 0, 0, 1) inset;
 }
 
 .chart-name-input {
-  width: 250px;
+  width: 100%;
+  max-width: 900px;
+  font-size: 20px !important;
 }
 
-.adding-chart {
+.tools-row {
   display: flex;
-  align-items: flex-end;
+  justify-content: space-between;
   column-gap: 16px;
 }
 
-.add-button {
-  height: 56px;
+.input-and-select {
+  width: 100%;
+  display: flex;
+  column-gap: 16px;
 }
 
 .chart-bg-color-selector {
@@ -46,7 +48,15 @@
 }
 
 @media (max-width: 700px) {
+  .modal-container {
+    justify-content: center;
+  }
   .chart-and-color-picker {
+    flex-direction: column;
+    row-gap: 8px;
+    align-items: center;
+  }
+  .tools-row {
     flex-direction: column;
     row-gap: 8px;
   }

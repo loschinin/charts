@@ -3,7 +3,7 @@ import DatePicker from 'react-datepicker';
 import { Button } from '@mui/material';
 import moment from 'moment/moment';
 import 'react-datepicker/dist/react-datepicker.css';
-import './Picker.css'
+import './CustomDatePicker.css';
 
 const getValueOfDate = (date: Date | string) => {
   return new Date(moment(date).format('ddd D MMM')).valueOf();
@@ -14,7 +14,7 @@ type Props = {
   setSelected(data: string[]): void;
 };
 
-export const Picker = ({ dates, setSelected }: Props) => {
+export const CustomDatePicker = ({ dates, setSelected }: Props) => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState<Date | null>(null);
   const onChange = (dates: [Date, Date]) => {
@@ -26,7 +26,7 @@ export const Picker = ({ dates, setSelected }: Props) => {
   return (
     <div>
       <DatePicker
-          className={'date-picker'}
+        className={'date-picker'}
         selected={startDate}
         onChange={onChange}
         startDate={startDate}
@@ -34,11 +34,7 @@ export const Picker = ({ dates, setSelected }: Props) => {
         selectsRange
         inline
       />
-      <Button
-        className={'date-picker-button'}
-        onClick={handleConfirmPeriod}
-        variant={'contained'}
-      >
+      <Button className={'date-picker-button'} onClick={handleConfirmPeriod} variant={'contained'}>
         confirm period
       </Button>
     </div>
@@ -48,8 +44,7 @@ export const Picker = ({ dates, setSelected }: Props) => {
     const filteredDates = dates.filter(date => {
       const dateValue = getValueOfDate(date);
       return (
-        dateValue >= getValueOfDate(startDate) &&
-        dateValue <= getValueOfDate(endDate || startDate)
+        dateValue >= getValueOfDate(startDate) && dateValue <= getValueOfDate(endDate || startDate)
       );
     });
     setSelected(filteredDates);
