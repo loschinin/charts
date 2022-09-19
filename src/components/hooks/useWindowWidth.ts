@@ -1,18 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
 
-type Props = {
-  offset: number;
-  breakPoint: number;
-};
-
-export const useWindowWidth = ({ offset, breakPoint }: Props) => {
+export const useWindowWidth = () => {
   const [width, setWidth] = useState(0);
+
   const updateChartWidth = useCallback(() => {
     const clientWidth = document.documentElement.clientWidth;
-    setWidth(
-      clientWidth < breakPoint ? clientWidth : clientWidth - offset
-    );
-  }, [offset, breakPoint]);
+    setWidth(clientWidth);
+  }, []);
 
   useEffect(() => {
     updateChartWidth();

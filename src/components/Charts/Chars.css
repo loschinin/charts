@@ -1,16 +1,12 @@
 .charts-page {
-  color: honeydew;
+  padding-top: 64px;
   row-gap: 30px;
   display: flex;
   flex-direction: column;
 }
 
-.date-picker-button {
-  width: 100%;
-}
-
 .empty-data {
-  color: honeydew;
+  color: #414141;
   font-size: 30px;
   display: flex;
   justify-content: center;

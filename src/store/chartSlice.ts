@@ -1,14 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { mockData, mockSeriesData1 } from './mockData';
+import { mockData, mockSeriesData1 } from '../mockData';
 
 export type SeriesData = { date: string; value: number };
-export type ChartType =
-  | 'column'
-  | 'line'
-  | 'spline'
-  | 'area'
-  | 'bar'
-  | 'pie';
+export type ChartType = 'column' | 'line' | 'spline' | 'area' | 'bar' | 'pie';
 
 export type DataType = {
   name: string;
@@ -60,14 +54,10 @@ const chartSlice = createSlice({
       });
     },
     removeChart(state, action: PayloadAction<{ index: number }>) {
-      state.charts = state.charts.filter(
-        (_, index) => index !== action.payload.index
-      );
-      console.log('removed from state', state);
+      state.charts = state.charts.filter((_, index) => index !== action.payload.index);
     },
   },
 });
 
-export const { addChart, editChart, removeChart } =
-  chartSlice.actions;
+export const { addChart, editChart, removeChart } = chartSlice.actions;
 export default chartSlice.reducer;

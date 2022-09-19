@@ -1,47 +1,45 @@
 .date-picker {
-    background-color: #282c34;
-
+  background-color: #282c34;
 }
 
 .react-datepicker {
-    background-color: #282c34;
-    border: none;
-    border-radius: 0;
+  background-color: #282c34;
+  border: none;
+  border-radius: 0;
 }
 
-.react-datepicker__header  {
-    background-color: #282c34;
-
+.react-datepicker__header {
+  background-color: #282c34;
 }
 
 .react-datepicker__current-month {
-    color: #e5e5e5;
+  color: #e5e5e5;
 }
 
 .react-datepicker__day-name {
-    color: #dcdcdc;
+  color: #dcdcdc;
 }
 
 .react-datepicker__day {
-    color: wheat;
+  color: honeydew;
 }
 
 .react-datepicker__day:hover {
-    background-color: #131313;
+  background-color: #7851bd;
 }
 
 .react-datepicker__day--in-range {
-    background-color: #e91e63;
+  background-color: #673ab7;
 }
 
 .react-datepicker__day--selected {
-    background-color: #d96089;
+  background-color: #7851bd;
 }
 
 .react-datepicker__day--keyboard-selected {
-    background-color: #e387a6;
+  background-color: #7851bd;
 }
 
 .react-datepicker__day--in-selecting-range:not(.react-datepicker__day--in-range, .react-datepicker__month-text--in-range) {
-    background-color: #ea3d77;
+  background-color: #783de1;
 }

@@ -3,12 +3,19 @@ import React, { useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-import { chartOptions } from './chartOptions';
 import moment from 'moment/moment';
-import { useWindowWidth } from '../Charts/useWindowWidth';
-import { Picker } from '../Picker/Picker';
+import { useWindowWidth } from '../hooks/useWindowWidth';
+import { CustomDatePicker } from '../CustomDatePicker/CustomDatePicker';
 import './Chart.css';
 import { ChartType } from '../../store/chartSlice';
+import {
+  COMMON_CHART_OPTIONS,
+  BREAK_POINT,
+  DEFAULT_BG_COLOR,
+  DEFAULT_HEIGHT,
+  DEFAULT_OFFSET,
+  MIN_PADDING,
+} from '../constants';
 
 type Props = {
   chartName: string;
@@ -17,14 +24,9 @@ type Props = {
   chartType?: ChartType;
   chartBgColor?: string;
   widthOffset?: number;
-  withPicker?: boolean;
+  withDatePicker?: boolean;
   height?: number;
 };
-
-const DEFAULT_BG_COLOR = '#575757';
-const DEFAULT_OFFSET = 350;
-const BREAK_POINT = 700;
-const DEFAULT_HEIGHT = 276;
 
 export const Chart = ({
   chartName,
@@ -33,58 +35,58 @@ export const Chart = ({
   chartType = 'column',
   chartBgColor = DEFAULT_BG_COLOR,
   widthOffset = DEFAULT_OFFSET,
-  withPicker,
+  withDatePicker,
   height = DEFAULT_HEIGHT,
 }: Props) => {
-  const formatDate = (date: string) =>
-    moment(date).format('MMMM DD YYYY');
+  const formatDate = (date: string) => moment(date).format('MMMM DD YYYY');
 
-  const [selectedDates, setSelectedDates] = useState<string[]>(
-    initialSelectedDates
-  );
-  const width = useWindowWidth({
-    offset: widthOffset,
-    breakPoint: BREAK_POINT,
-  });
+  const [selectedDates, setSelectedDates] = useState<string[]>(initialSelectedDates);
+  const width = useWindowWidth();
+  const calculatedWidth = width < BREAK_POINT ? width - MIN_PADDING : width - widthOffset;
   const mergedData = selectedDates.map((date, index) => ({
     name: formatDate(date),
     y: values[index],
   }));
   return (
-    <div className={'chart-with-date-picker'}>
-      {withPicker && (
-        <Picker
-          setSelected={setSelectedDates}
-          dates={initialSelectedDates}
-        />
+    <div className={'chart'}>
+      {withDatePicker && (
+        <CustomDatePicker setSelected={setSelectedDates} dates={initialSelectedDates} />
       )}
-      <HighchartsReact
-        highcharts={Highcharts}
-        options={{
-          ...chartOptions,
-          chart: {
-            type: chartType,
-            animation: false,
-            height: height,
-            width,
-            backgroundColor: chartBgColor,
-          },
-          title: {
-            align: 'left',
-            text: chartName,
-            style: {
-              color: '#ffffff',
-              fontSize: 35,
-            },
-          },
-          series: [
-            {
-              colorByPoint: true,
-              data: mergedData,
-            },
-          ],
-        }}
-      />
+      <HighchartsReact highcharts={Highcharts} options={getOptions()} />
     </div>
   );
+
+  function getOptions() {
+    return {
+      ...COMMON_CHART_OPTIONS,
+      chart: {
+        type: chartType,
+        animation: false,
+        height,
+        width: calculatedWidth,
+        backgroundColor: chartBgColor,
+      },
+      title: {
+        align: 'left',
+        text: chartName,
+        style: {
+          color: '#ffffff',
+          fontSize: 30,
+        },
+      },
+      series: [
+        {
+          colorByPoint: true,
+          data: mergedData,
+          fillColor: {
+            linearGradient: [0, 0, 0, 300],
+            stops: [
+              [0, '#7442f4'],
+              [1, 'rgba(255,255,255,0.19)'],
+            ],
+          },
+        },
+      ],
+    };
+  }
 };

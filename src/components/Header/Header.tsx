@@ -1,29 +1,41 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import chart from './chart.png';
-
-import './Header.css';
+import chart from './logo.png';
+import { useTheme } from '@mui/material/styles';
+import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
 
 export const Header = () => {
+  const theme = useTheme();
+  const { text } = theme.palette;
   const location = useLocation();
-  const links = ['charts', 'settings'];
+  const navLinks = ['charts', 'settings'];
   return (
-    <div className={'header'}>
-      <img src={chart} alt={''} />
-      {links.map(link => (
-        <Link
-          key={link}
-          className={
-            location.pathname === `/${link}` ||
-            (location.pathname === '/' && link === 'charts')
-              ? 'active'
-              : ''
-          }
-          to={link === 'charts' ? '/' : link}
-        >
-          {link.toUpperCase()}
-        </Link>
-      ))}
-    </div>
+    <AppBar component="nav" sx={{ background: theme.palette.background.default }}>
+      <Toolbar>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <img style={{ width: '30px' }} src={chart} alt={''} />
+        </Typography>
+        <Box>
+          {navLinks.map(link => {
+            const isLinkActive =
+              location.pathname === `/${link}` || (location.pathname === '/' && link === 'charts');
+            return (
+              <Link key={link} to={link === 'charts' ? '/' : link}>
+                <Button
+                  key={link}
+                  sx={{
+                    color: isLinkActive ? text.primary : text.secondary,
+                    fontSize: 20,
+                    width: '120px',
+                  }}
+                >
+                  {link}
+                </Button>
+              </Link>
+            );
+          })}
+        </Box>
+      </Toolbar>
+    </AppBar>
   );
 };
