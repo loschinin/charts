@@ -11,6 +11,10 @@
   padding: 20px 40px 30px;
 }
 
+.modal-container:focus {
+  outline: 0;
+}
+
 .chart-name-input {
   width: 100%;
   max-width: 900px;
