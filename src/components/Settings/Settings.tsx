@@ -8,6 +8,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 import { removeChart } from '../../store/chartSlice';
 import ChartModal from '../ChartModal/ChartModal';
+import {Page} from "../Page/Page";
 
 export const Settings = () => {
   const { charts } = useAppSelector(state => state.charts);
@@ -21,7 +22,7 @@ export const Settings = () => {
   }, [openModal]);
 
   return (
-    <div className={'settings'}>
+    <Page>
       <Typography variant="h4">
         On this page you can add a new chart or edit an existing one
       </Typography>
@@ -69,6 +70,6 @@ export const Settings = () => {
         </div>
       ))}
       <ChartModal open={openModal} setOpen={setOpenModal} idForEditableMode={chartId} />
-    </div>
+    </Page>
   );
 };

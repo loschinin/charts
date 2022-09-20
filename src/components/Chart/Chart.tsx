@@ -14,7 +14,7 @@ import {
   DEFAULT_BG_COLOR,
   DEFAULT_HEIGHT,
   DEFAULT_OFFSET,
-  MIN_PADDING,
+  MIN_PADDING, DEFAULT_CHART_TYPE, COMMON_CHART_SERIES,
 } from '../constants';
 
 type Props = {
@@ -32,7 +32,7 @@ export const Chart = ({
   chartName,
   initialSelectedDates,
   values,
-  chartType = 'column',
+  chartType = DEFAULT_CHART_TYPE,
   chartBgColor = DEFAULT_BG_COLOR,
   widthOffset = DEFAULT_OFFSET,
   withDatePicker,
@@ -61,30 +61,19 @@ export const Chart = ({
       ...COMMON_CHART_OPTIONS,
       chart: {
         type: chartType,
-        animation: false,
         height,
         width: calculatedWidth,
         backgroundColor: chartBgColor,
+        ...COMMON_CHART_OPTIONS.chart
       },
       title: {
-        align: 'left',
         text: chartName,
-        style: {
-          color: '#ffffff',
-          fontSize: 30,
-        },
+        ...COMMON_CHART_OPTIONS.title
       },
       series: [
         {
-          colorByPoint: true,
           data: mergedData,
-          fillColor: {
-            linearGradient: [0, 0, 0, 300],
-            stops: [
-              [0, '#7442f4'],
-              [1, 'rgba(255,255,255,0.19)'],
-            ],
-          },
+          ...COMMON_CHART_SERIES,
         },
       ],
     };

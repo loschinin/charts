@@ -14,7 +14,28 @@ export const SELECT_MIN_WIDTH = 120;
 
 export const MIN_PADDING = 16;
 
+export const COMMON_CHART_SERIES = {
+  colorByPoint: true,
+  fillColor: {
+    linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+    stops: [
+      [0, '#7442f4'],
+      [1, 'rgba(255,255,255,0.19)'],
+    ],
+  },
+};
+
 export const COMMON_CHART_OPTIONS: Highcharts.Options = {
+  title: {
+    align: 'left',
+    style: {
+      color: '#ffffff',
+      fontSize: '30',
+    },
+  },
+  chart: {
+    animation: false
+  },
   subtitle: {
     align: 'left',
   },
