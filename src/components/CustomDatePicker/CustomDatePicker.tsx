@@ -6,7 +6,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import './CustomDatePicker.css';
 
 const getValueOfDate = (date: Date | string) => {
-  return new Date(moment(date).format('ddd D MMM')).valueOf();
+  return new Date(moment(date).format('YYYY-MM-DD')).valueOf();
 };
 
 type Props = {
